@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_web
+
 const owl_url =
     'https://raw.githubusercontent.com/flutter/website/master/src/images/owl.jpg';
 
@@ -9,6 +9,7 @@ class FadeInDemo extends StatefulWidget {
 }
 
 class _FadeInDemoState extends State<FadeInDemo> {
+  double opacity = 0;
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -21,9 +22,15 @@ class _FadeInDemoState extends State<FadeInDemo> {
               color: Colors.blueAccent,
             ),
           ),
-          onPressed: () => null,
+          onPressed: () {
+            setState(() {
+              opacity = 1;
+            });
+          },
         ),
-        Container(
+        AnimatedOpacity(
+          opacity: opacity,
+          duration: Duration(seconds: 5),
           child: Column(
             children: <Widget>[
               Text('Type: Owl'),
@@ -41,8 +48,11 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      debugShowCheckedModeBanner: false,
+      theme: ThemeData.dark(),
       home: Scaffold(
+        appBar: AppBar(
+          title: Text('Owl'),
+        ),
         body: Center(
           child: FadeInDemo(),
         ),
@@ -51,6 +61,6 @@ class MyApp extends StatelessWidget {
   }
 }
 
-Future<void> main() async {
-  await ui.web
+void main() {
+  return runApp(MyApp());
 }
